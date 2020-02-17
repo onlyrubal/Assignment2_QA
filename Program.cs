@@ -17,6 +17,7 @@ namespace Assignment2_QA
             int side3;
             do
             {
+                bool sideCheck = true;
                 Console.WriteLine("\n\n##Select from the mentioned menu\n");
                 Console.WriteLine("1. Enter triangle dimensions");
                 Console.WriteLine("2. Exit");
@@ -33,26 +34,43 @@ namespace Assignment2_QA
                 switch (userInput)
                 {
                     case 1:
-                        
-                        Console.WriteLine("Enter side 1");
-                        side1 = Convert.ToInt32(Console.ReadLine());
 
-                        Console.WriteLine("Enter side 2");
-                        side2 = Convert.ToInt32(Console.ReadLine());
-
-                        Console.WriteLine("Enter side 3");
-                        side3 = Convert.ToInt32(Console.ReadLine());
-
-                        if(((side1 + side2) > side3) && ((side2 + side3) > side1) && ((side1 + side3) > side2))
+                        do
                         {
-                            Console.WriteLine("It forms a triangle");
-                        }
-                        else
-                        {
-                            Console.WriteLine("It doesn't form a triangle");
-                            continue;
-                        }
+                            try
+                            {
+                                Console.WriteLine("Enter side 1");
+                                side1 = Convert.ToInt32(Console.ReadLine());
 
+                                Console.WriteLine("Enter side 2");
+                                side2 = Convert.ToInt32(Console.ReadLine());
+
+                                Console.WriteLine("Enter side 3");
+                                side3 = Convert.ToInt32(Console.ReadLine());
+
+                                if (((side1 + side2) > side3) && ((side2 + side3) > side1) && ((side1 + side3) > side2))
+                                {
+                                    Console.WriteLine("\nIt forms a triangle\n");
+                                    Console.WriteLine("Triangle is : " + TriangleSolver.Analyze(side1, side2, side3));
+                                }
+                                else
+                                {
+                                    Console.WriteLine("It doesn't form a triangle");
+                                }
+
+                                checkStatus = true;
+                                sideCheck = true;
+                                break;
+                            }
+                           
+                            catch (Exception e)
+                            {
+                                Console.WriteLine("\nEnter the side in Int format");
+                                sideCheck = false;
+                            }
+                           
+                        }
+                        while (!sideCheck);
                         break;
                     case 2:
                         Console.WriteLine("\n\n##Exiting##");
